@@ -1,9 +1,17 @@
 package driver;
 import java.awt.*;
+
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+
+import javax.swing.JOptionPane;
+import java.sql.Connection;
 public class LoginGUI extends JFrame {
     /**
 	 * 
@@ -41,7 +49,7 @@ public class LoginGUI extends JFrame {
         panel.add(loginButton);
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
+                try {LoginGUI loginGUI = new LoginGUI();
                     // Connect to the database
                 
                     String url = "jdbc:mysql://localhost:3306/students";
@@ -57,7 +65,11 @@ public class LoginGUI extends JFrame {
                     // Check if the login is successful
                     if (rs.next()) {
                         JOptionPane.showMessageDialog(null, "Login successful");
-                    } else {
+                        loginGUI.setVisible(false);
+
+                        StudentServicesGUI  studentServicesGUI = new StudentServicesGUI();         
+                        studentServicesGUI.setVisible(true);
+                        } else {
                         JOptionPane.showMessageDialog(null, "Invalid username or password");
                     }
 
@@ -79,6 +91,6 @@ public class LoginGUI extends JFrame {
     public static void main(String[] args) {
         LoginGUI loginGUI = new LoginGUI();
         loginGUI.setVisible(true);
+        
     }
 }
-
